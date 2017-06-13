@@ -1,5 +1,8 @@
 from string import ascii_lowercase
 
+LENGTH = len(ascii_lowercase)
+BEGINNING = ord('a') - 1
+
 
 def cipher(text):
     """Implementation of the atbash cipher, an ancient encryption system created in the Middle East."""
@@ -9,7 +12,7 @@ def cipher(text):
         if char.isdigit():
             ret.append(char)
         elif char.isalpha():
-            ret.append(ascii_lowercase[(96 - ord(char)) % 26])
+            ret.append(ascii_lowercase[(BEGINNING - ord(char)) % LENGTH])
 
     return [''.join(ret[x:x+5]) for x in range(0, len(ret), 5)]
 
