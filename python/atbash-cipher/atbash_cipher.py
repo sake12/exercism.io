@@ -8,7 +8,7 @@ def cipher(text):
     for char in text.lower():
         if char.isdigit():
             ret.append(char)
-        elif char.isalnum():
+        elif char.isalpha():
             ret.append(ascii_lowercase[(96 - ord(char)) % 26])
 
     return [''.join(ret[x:x+5]) for x in range(0, len(ret), 5)]
