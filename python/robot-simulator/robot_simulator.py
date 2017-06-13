@@ -7,30 +7,29 @@ class Robot(object):
         self.bearing = bearing
 
     def advance(self):
-        # TODO: Instead of a bunch of ifs, you can store coordinate changes for advance
-        # in a dictionary with entries like NORTH: (0, 1), and then apply it using a comprehension and zip.
-        coords = self.coordinates
-        if self.bearing == NORTH:
-            self.coordinates = (coords[0], coords[1] + 1)
-        elif self.bearing == EAST:
-            self.coordinates = (coords[0] + 1, coords[1])
-        elif self.bearing == SOUTH:
-            self.coordinates = (coords[0], coords[1] - 1)
-        elif self.bearing == WEST:
-            self.coordinates = (coords[0] - 1, coords[1])
+        coords = {
+            NORTH: (0, 1),
+            EAST: (1, 0),
+            SOUTH: (0, -1),
+            WEST: (-1, 0),
+        }
+
+        add = coords[self.bearing]
+        self.coordinates = (self.coordinates[0] + add[0],
+                            self.coordinates[1] + add[1])
 
     def simulate(self, text):
+        command = {
+            'A': self.advance,
+            'L': self.turn_left,
+            'R': self.turn_right
+        }
+
         for move in text:
-            if move == 'A':
-                self.advance()
-            elif move == 'L':
-                self.turn_left()
-            elif move == 'R':
-                self.turn_right()
+            command[move]()
 
     def turn_right(self):
         self.bearing = (self.bearing + 1) % 4
 
     def turn_left(self):
         self.bearing = (self.bearing - 1) % 4
-
