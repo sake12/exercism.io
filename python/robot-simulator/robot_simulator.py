@@ -7,6 +7,8 @@ class Robot(object):
         self.bearing = bearing
 
     def advance(self):
+        # TODO: Instead of a bunch of ifs, you can store coordinate changes for advance
+        # in a dictionary with entries like NORTH: (0, 1), and then apply it using a comprehension and zip.
         coords = self.coordinates
         if self.bearing == NORTH:
             self.coordinates = (coords[0], coords[1] + 1)
