@@ -7,11 +7,8 @@ def slices(text, number):
     if not (1 <= number <= len(text)):
         raise ValueError("No way I can do it!")
 
-    for X in range(len(text)):
+    for X in range(len(text) + 1 - number):
         slc = text[X:X+number]
-        if len(slc) != number:
-            break
-
         ret.append([int(a) for a in slc])
 
     return ret
